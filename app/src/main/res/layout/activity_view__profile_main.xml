@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View_activity.View_Profile_main">
+
+    <com.github.mzule.fantasyslide.FantasyDrawerLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Saidur er Customize Akam\nAita kintu Home Activite"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="@dimen/_30sdp"/>
+
+        <com.github.mzule.fantasyslide.SideBar
+            android:id="@+id/leftSideBar"
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/colorinGeneral"
+            android:gravity="fill_vertical"
+            app:maxTranslationX="66dp">
+
+            <LinearLayout
+                android:id="@+id/userInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:gravity="center_horizontal"
+
+
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_margin="@dimen/_9sdp"
+                    android:src="@drawable/me"
+                    app:civ_border_color="@color/colorGreen"
+                    app:civ_border_width="@dimen/_3sdp" />
+
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saidur Rahman"
+                android:textColor="@color/menu_text_color"
+                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01793208341"
+                    android:textColor="@color/menu_text_color"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:onClick="onClicks"
+                android:id="@+id/dash"
+                style="@style/MenuText"
+                android:drawableLeft="@drawable/ic_dashboard"
+                android:text="DashBoard" />
+
+            <TextView
+                android:onClick="onClicks"
+                android:id="@+id/prof"
+                style="@style/MenuText"
+                android:drawableLeft="@drawable/ic_profile"
+                android:text="Profile" />
+
+            <!--<TextView
+                style="@style/MenuText"
+                android:drawableLeft="@drawable/coupon"
+                android:text="Funds" />-->
+
+            <TextView
+                android:onClick="onClicks"
+                android:id="@+id/about"
+                style="@style/MenuText"
+                android:drawableLeft="@drawable/ic_about"
+                android:text="About Us" />
+
+            <TextView
+                android:onClick="onClicks"
+                android:id="@+id/out"
+                style="@style/MenuText"
+                android:drawableLeft="@drawable/ic_logout"
+                android:text="Logout" />
+        </com.github.mzule.fantasyslide.SideBar>
+
+        <!--<com.github.mzule.fantasyslide.SideBar
+            android:id="@+id/rightSideBar"
+            android:layout_width="133dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="@drawable/bg_right_bar"
+            android:gravity="center_vertical|right"
+            app:maxTranslationX="-33dp">
+
+            <TextView
+                style="@style/MenuText"
+                android:text="Organizations" />
+
+            <TextView
+                style="@style/MenuText"
+                android:text="Local Clubes" />
+
+            <TextView
+                style="@style/MenuText"
+                android:text="Facebook Groups" />
+
+            <TextView
+                style="@style/MenuText"
+                android:text="Hospital Numbers" />
+
+            <TextView
+                style="@style/MenuText"
+                android:text="Hospital Address" />
+
+            <TextView
+                style="@style/MenuText"
+                android:text="Ambulance" />
+
+            <TextView
+                style="@style/MenuText"
+                android:text="Logout" />
+        </com.github.mzule.fantasyslide.SideBar>-->
+    </com.github.mzule.fantasyslide.FantasyDrawerLayout>
+
+
+
+
+</RelativeLayout>
+
+

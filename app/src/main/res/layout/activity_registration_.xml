@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Others.Registration_Activity">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/otp_card1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_340sdp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:layout_marginEnd="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="#811B1B"
+        android:elevation="20dp"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/otp_circle1"
+                android:layout_width="@dimen/_92sdp"
+                android:layout_height="@dimen/_69sdp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_65sdp"
+                android:layout_marginEnd="@dimen/_100sdp"
+                android:src="@drawable/blood_donlogo" />
+
+            <TextView
+                android:id="@+id/otp_text1"
+                android:layout_below="@+id/otp_circle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:text="Phone Verification"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/otp_text2"
+                android:layout_below="@+id/otp_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:text="We need to register your number before
+getting started !"
+                android:textSize="12sp"
+                android:textColor="#8D8D8D"/>
+
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/otp_linearlayout"
+                android:layout_width="match_parent"
+                android:background="@drawable/etfield_default"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_below="@+id/otp_text2"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_33sdp"
+                android:layout_marginEnd="@dimen/_33sdp"
+                android:layout_marginTop="@dimen/_44sdp">
+
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/cP"
+                    android:layout_width="@dimen/_89sdp"
+                    app:ccp_textSize="13sp"
+                    android:layout_height="wrap_content"
+                    app:ccp_contentColor="@color/colorPrimaryDark" />
+
+                <EditText
+                    android:id="@+id/otp_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext"
+                    android:inputType="number"
+                    android:hint="179XXX-XXXX"
+                    android:digits="0123456789"
+                    android:maxLength="11"
+                    android:textSize="16sp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    />
+            </android.support.v7.widget.LinearLayoutCompat>
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+    <Button
+        android:id="@+id/otp_sendcode"
+        android:layout_width="@dimen/_332sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/_42sdp"
+        android:layout_marginEnd="@dimen/_42sdp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/reg_btn_bg"
+        android:text="Send the code"
+        android:textColor="@android:color/white"
+        />
+
+</RelativeLayout>

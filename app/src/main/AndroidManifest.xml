@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.saidur.blooddonor">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".View_activity.View_Profile_main"></activity>
+        <activity android:name=".Home_Activity" />
+        <activity android:name=".Others.Splash_Screen" />
+        <activity android:name=".Others.About_Activity" />
+        <activity android:name=".Others.Registration_Activity" />
+        <activity android:name=".Others.Phoneauth_Activity" />
+        <activity android:name=".Add_activity.Add_donorActivity" />
+        <activity android:name=".Available_activity.Available_donorActivity" />
+        <activity android:name=".Available_activity.Available_detailActivity" />
+        <activity android:name=".View_activity.View_activity" />
+        <activity android:name=".View_activity.View_profileActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

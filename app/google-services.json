@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "710147222505",
+    "firebase_url": "https://sayed-d6eec.firebaseio.com",
+    "project_id": "sayed-d6eec",
+    "storage_bucket": "sayed-d6eec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710147222505:android:66a9f2d449f0516a7c7978",
+        "android_client_info": {
+          "package_name": "com.saidur.blooddonor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710147222505-cl8kqq8ksnfoimpplnlo4g0rvtri03q1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saidur.blooddonor",
+            "certificate_hash": "3c9574b6155303dca9c9c49425d9357c1be0c9fc"
+          }
+        },
+        {
+          "client_id": "710147222505-j73r9emp0lak1bpshtsuv0vmsijtaa6m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPZsJyCCBTxEL01HKjkiHZSiRYXXKdiPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710147222505-j73r9emp0lak1bpshtsuv0vmsijtaa6m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

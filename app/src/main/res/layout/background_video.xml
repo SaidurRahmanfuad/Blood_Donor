@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/background_video">
+    <VideoView
+        android:id="@+id/sr_VideoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center" />
+
+  <!-- <EditText
+        android:id="@+id/et_emailaddress"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="273dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="5dp"
+        android:textColor="#ffff"
+        android:textColorHint="@color/colorwhite" />
+
+    <EditText
+        android:id="@+id/et_phonenumber"
+        android:layout_below="@+id/et_emailaddress"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:hint="Phone Number"
+        android:inputType="number"
+        android:paddingLeft="5dp"
+        android:textColor="@color/colorwhite"
+        android:textColorHint="@color/colorwhite" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_below="@+id/et_phonenumber"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="5dp"
+        android:textColor="@color/colorwhite"
+        android:textColorHint="@color/colorwhite" />-->
+
+    <Button
+        android:id="@+id/btn_goto_reg"
+
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:drawablePadding="@dimen/_2sdp"
+        android:gravity="left|center"
+        android:background="@drawable/sr_transparent"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="@dimen/_20sdp"
+        android:text="Register Now!"
+        android:textColor="@color/colorwhite"
+        android:textAlignment="center"/>
+</RelativeLayout>
