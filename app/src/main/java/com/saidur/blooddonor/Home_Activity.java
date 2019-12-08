@@ -17,24 +17,23 @@ import com.saidur.blooddonor.Add_activity.Add_donorActivity;
 import com.saidur.blooddonor.Available_activity.Available_donorActivity;
 import com.saidur.blooddonor.Database.Queary;
 import com.saidur.blooddonor.Model.Donors_online;
-import com.saidur.blooddonor.Others.About_Activity;
-import com.saidur.blooddonor.View_activity.View_Profile_main;
+import com.saidur.blooddonor.View_activity.Univarsal_Activity;
 import com.saidur.blooddonor.View_activity.View_activity;
 
 public class Home_Activity extends AppCompatActivity {
-    private Queary quary;
+   private Queary quary;
     private Button viewBtn,addBtn,availableBtn,aboutBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_);
+        setContentView(R.layout.homemenu_items);
 
         init();
         OnlineDataCheck();
-        onClick();
+        //onClick();
     }
-    private void OnlineDataCheck() {
+   private void OnlineDataCheck() {
 
 
         if (quary.getUserId() == null) {
@@ -57,15 +56,15 @@ public class Home_Activity extends AppCompatActivity {
 
                         }
 
-/*
-                    for (int j = 0; j < firebaseId.size(); j++) {
+
+                  //  for (int j = 0; j < firebaseId.size(); j++) {
 
 
-
-                    }*/
 
                     }
-                }
+
+                    }
+
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -78,7 +77,7 @@ public class Home_Activity extends AppCompatActivity {
     }
 
 
-    private void onClick()
+/*    private void onClick()
     {
 
         viewBtn.setOnClickListener(new View.OnClickListener() {
@@ -110,16 +109,16 @@ public class Home_Activity extends AppCompatActivity {
         aboutBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*BottomSheetDialog dialog = new BottomSheetDialog(MainActivity.this);
-                View imageCaptureDialogView = getLayoutInflater().inflate(R.layout.about_layout, null, false);
+              *//* BottomSheetDialog dialog = new BottomSheetDialog(Home_Activity.this);
+                View imageCaptureDialogView = getLayoutInflater().inflate(R.layout.activity_about_, null, false);
                 dialog.setContentView(imageCaptureDialogView);
-                dialog.show();*/
-                startActivity(new Intent(Home_Activity.this, View_Profile_main.class));
+                dialog.show();*//*
+                startActivity(new Intent(Home_Activity.this, Univarsal_Activity.class));
                 finish();
 
             }
         });
-    }
+    }*/
 
     private void init()
     {

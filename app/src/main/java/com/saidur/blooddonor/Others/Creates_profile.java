@@ -1,4 +1,4 @@
-package com.saidur.blooddonor.Add_activity;
+package com.saidur.blooddonor.Others;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -29,21 +29,26 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.saidur.blooddonor.Add_activity.Add_donorActivity;
 import com.saidur.blooddonor.Database.Queary;
 import com.saidur.blooddonor.Model.Donors;
 import com.saidur.blooddonor.R;
+import com.saidur.blooddonor.View_activity.Homes_main;
+import com.saidur.blooddonor.View_activity.View_profileActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Calendar;
 
-public class Add_donorActivity extends AppCompatActivity {
+public class Creates_profile extends AppCompatActivity {
     private EditText nameET,ageET,contractNumberET,addressET;
+    DatabaseReference databaseDonors;
     private TextView lastDonationDateTV;
     private Spinner bloodGroupSPN;
     private Button doneBTN;
@@ -53,18 +58,34 @@ public class Add_donorActivity extends AppCompatActivity {
     private int CAMERA_REQUEAT_CODE = 10;
     private int GALLERY_REQUEST_CODE = 20;
     private String name,age,contractNumber,address,lastDonationDate,bloodGroup;
-    private Queary quary;
+    //private Queary quary;
     private String donorImageString = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_donor);
-
+        setContentView(R.layout.activity_creates_profile);
+      databaseDonors = FirebaseDatabase.getInstance().getReference("Donors_Profile");
         init();
 
         onClick();
-
     }
+
+
+
+    private void init()
+    {
+
+        //quary = new Queary(this);
+        nameET = findViewById(R.id.nameETId);
+        ageET = findViewById(R.id.ageETId);
+        contractNumberET = findViewById(R.id.contractETId);
+        addressET = findViewById(R.id.addressETId);
+        lastDonationDateTV = findViewById(R.id.lastDonatedateTVId);
+        doneBTN = findViewById(R.id.doneBTNId);
+        bloodGroupSPN = findViewById(R.id.spinnerId);
+        donorIV = findViewById(R.id.donorImageId);
+    }
+
     public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 70, stream);
@@ -76,16 +97,19 @@ public class Add_donorActivity extends AppCompatActivity {
     private void onClick() {
 
         doneBTN.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
             @Override
             public void onClick(View v)
             {
 
-                boolean verified = verifyFild();
+
+
+
+                boolean verified = add_donorverifyFild();
 
                 if(verified)
                 {
-                    ProgressDialog progressDialog = new ProgressDialog(Add_donorActivity.this);
+                    ProgressDialog progressDialog = new ProgressDialog(Creates_profile.this);
                     progressDialog.setMessage("Waiting....");
                     progressDialog.show();
                     progressDialog.setCancelable(false);
@@ -95,31 +119,38 @@ public class Add_donorActivity extends AppCompatActivity {
                     progressDialog.dismiss();
 
                     Donors donors = new Donors(name, age, donorImageString, bloodGroup, contractNumber, lastDonationDate, address);
+                    String id= FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
+                    databaseDonors.child(id).setValue(donors);
 
-                    try {
 
-                        quary.InsertData(donors);
-                        clearAll();
-                        Alertdialog("Message", "Profile Update Successfully");
+                    //Alertdialog("Message", "Profile Update Successfully");
+                   /* try {
 
-                        if (isNetworkAvailable()) {
+                        //quary.InsertData(donors);
+                      //  clearAll();
 
-                            String id = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
-                            DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("User");
+
+
+
+                        String id = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
+                            DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("User");*/
 
                             // String unicId = firebaseDatabase.push().getKey();
-                            String sqliteId = quary.getUserId();
-                            donors = new Donors(sqliteId, name, age, donorImageString, bloodGroup, contractNumber, lastDonationDate, address);
-                            firebaseDatabase.child(id).child(sqliteId).setValue(donors);
+                            //String sqliteId = quary.getUserId();
+                           // donors = new Donors(sqliteId, name, age, donorImageString, bloodGroup, contractNumber, lastDonationDate, address);
+                           // firebaseDatabase.child(id).child(sqliteId).setValue(donors);
 
-                        }
+                        startActivity(new Intent(Creates_profile.this, Homes_main.class));
+                        finish();
 
-                    }catch (Exception e)
+
+                  /*  }catch (Exception e)
                     {
 
-                    }
+                    }*/
 
                 }
+
             }
 
         });
@@ -139,7 +170,7 @@ public class Add_donorActivity extends AppCompatActivity {
                 int Month= calendar.get(Calendar.MONTH);
                 int Day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                datePickerDialog = new DatePickerDialog(Add_donorActivity.this, new DatePickerDialog.OnDateSetListener() {
+                datePickerDialog = new DatePickerDialog(Creates_profile.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)
                     {
@@ -154,37 +185,14 @@ public class Add_donorActivity extends AppCompatActivity {
         });
 
     }
-    public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-    private void clearAll() {
-        //Clear All Add Attribute
+    private boolean add_donorverifyFild() {
 
-        nameET.setText(null);
-        ageET.setText(null);
-        contractNumberET.setText(null);
-        addressET.setText(null);
-        lastDonationDateTV.setText(null);
-        bloodGroupSPN.setId(0);
-
-        Drawable drawable = getResources().getDrawable(R.drawable.prof_icon);
-        donorImage =null ;
-        donorIV.setImageBitmap(((BitmapDrawable)drawable).getBitmap());
-        //donorIV.setImageBitmap();
-
-    }
-
-    private boolean verifyFild() {
-
-        name = nameET.getText().toString();
-        age = ageET.getText().toString();
-        contractNumber = contractNumberET.getText().toString();
-        address = addressET.getText().toString();
-        lastDonationDate = lastDonationDateTV.getText().toString();
-        bloodGroup = bloodGroupSPN.getSelectedItem().toString();
+        name = nameET.getText().toString().trim();
+        age = ageET.getText().toString().trim();
+        contractNumber = contractNumberET.getText().toString().trim();
+        address = addressET.getText().toString().trim();
+        lastDonationDate = lastDonationDateTV.getText().toString().trim();
+        bloodGroup = bloodGroupSPN.getSelectedItem().toString().trim();
 
 
         if(lastDonationDate.equals("dd-mm-yyyy"))
@@ -194,7 +202,8 @@ public class Add_donorActivity extends AppCompatActivity {
 
         if(name.isEmpty() || age.isEmpty() || contractNumber.isEmpty() || address.isEmpty()  || bloodGroup.isEmpty() )
         {
-            Alertdialog("Error !! ","Filup the all fild..");
+            Toast.makeText(this,"Insert all field",Toast.LENGTH_SHORT).show();
+          //  Alertdialog("Error !! ","Filup the all fild..");
 
             //lastDonationDate.equals("dd-mm-yyyy")
         }
@@ -202,7 +211,7 @@ public class Add_donorActivity extends AppCompatActivity {
 
         else if(donorImage == null)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(Add_donorActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(Creates_profile.this);
             builder.setTitle("Are you sure ?");
             builder.setMessage("Donor profile set Default!");
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -227,11 +236,18 @@ public class Add_donorActivity extends AppCompatActivity {
         }
         else
         {
+
             return true;
         }
 
         return false;
         //return true;
+    }
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     private void defaultImage() {
@@ -275,40 +291,6 @@ public class Add_donorActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void Alertdialog(String title, String message) {
-
-        AlertDialog.Builder dialog = new AlertDialog.Builder(Add_donorActivity.this);
-        dialog.setTitle(title);
-        dialog.setMessage(message);
-
-        //dialog.show();
-
-        final AlertDialog alertDialog = dialog.create();
-        alertDialog.show();
-        new Handler().postDelayed(new Runnable()
-        {
-            @Override
-            public void run() {
-                alertDialog.dismiss();
-            }
-        },1500);
-    }
-
-    private void init()
-    {
-
-        quary = new Queary(this);
-        nameET = findViewById(R.id.nameETId);
-        ageET = findViewById(R.id.ageETId);
-        contractNumberET = findViewById(R.id.contractETId);
-        addressET = findViewById(R.id.addressETId);
-        lastDonationDateTV = findViewById(R.id.lastDonatedateTVId);
-        doneBTN = findViewById(R.id.doneBTNId);
-        bloodGroupSPN = findViewById(R.id.spinnerId);
-        donorIV = findViewById(R.id.donorImageId);
-    }
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         try {
@@ -340,5 +322,22 @@ public class Add_donorActivity extends AppCompatActivity {
         }
 
     }
+/*    private void Alertdialog(String title, String message) {
 
+        AlertDialog.Builder dialog = new AlertDialog.Builder(Creates_profile.this);
+        dialog.setTitle(title);
+        dialog.setMessage(message);
+
+        //dialog.show();
+
+        final AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
+        new Handler().postDelayed(new Runnable()
+        {
+            @Override
+            public void run() {
+                alertDialog.dismiss();
+            }
+        },1000);
+    }*/
 }

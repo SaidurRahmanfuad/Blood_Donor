@@ -34,7 +34,7 @@ import java.util.List;
 
 public class Donors_viewAdaptar extends RecyclerView.Adapter<Donors_viewAdaptar.MyViewHolder> {
 
-    private List<Donors> donorsList = new ArrayList<>();
+    private List<Donors> donorsList;
     private Context context;
 
     public Donors_viewAdaptar(List<Donors> donorList, Context context) {

@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.github.mzule.fantasyslide.FantasyDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View_activity.View_Profile_main">
+    android:id="@+id/drawerLayout"
+    tools:context=".View_activity.Homes_main">
 
-    <com.github.mzule.fantasyslide.FantasyDrawerLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/drawerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<include
+    layout="@layout/activity_homes_appbar_main"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
 
-        <TextView
+    />
+
+       <!-- <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Saidur er Customize Akam\nAita kintu Home Activite"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:textSize="@dimen/_30sdp"/>
+            android:orientation="vertical"
+            >
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+            </android.support.v7.widget.Toolbar>
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </FrameLayout>
+        </LinearLayout>-->
 
         <com.github.mzule.fantasyslide.SideBar
             android:id="@+id/leftSideBar"
@@ -40,6 +52,7 @@
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageShow_drwar"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"
                     android:layout_margin="@dimen/_9sdp"
@@ -49,11 +62,12 @@
 
 
                 <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Saidur Rahman"
-                android:textColor="@color/menu_text_color"
-                android:textSize="16sp" />
+                    android:id="@+id/nameShowdrwar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/menu_text_color"
+                    android:textSize="16sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -134,10 +148,4 @@
                 android:text="Logout" />
         </com.github.mzule.fantasyslide.SideBar>-->
     </com.github.mzule.fantasyslide.FantasyDrawerLayout>
-
-
-
-
-</RelativeLayout>
-
 

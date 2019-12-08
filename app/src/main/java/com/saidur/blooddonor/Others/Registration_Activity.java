@@ -20,12 +20,10 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
-import com.saidur.blooddonor.Home_Activity;
 import com.saidur.blooddonor.R;
 import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.saidur.blooddonor.View_activity.View_activity;
+import com.saidur.blooddonor.View_activity.Homes_main;
 
 import java.util.concurrent.TimeUnit;
 
@@ -124,7 +122,7 @@ public class Registration_Activity extends AppCompatActivity {
         Log.d("id", "onStart: "+id);
         if(id != null)
         {
-            startActivity(new Intent(Registration_Activity.this, Home_Activity.class));
+            startActivity(new Intent(Registration_Activity.this, Homes_main.class));
             finish();
         }
     }
@@ -219,7 +217,7 @@ public class Registration_Activity extends AppCompatActivity {
                             // Common.phone_number=number;
                             // User user =new User(number,getIntent().getStringExtra("name"),getIntent().getStringExtra("password"));
                             FirebaseDatabase.getInstance().getReference("User");
-                            Intent intent = new Intent(Registration_Activity.this, Home_Activity.class);
+                            Intent intent = new Intent(Registration_Activity.this, Creates_profile.class);
                             intent.putExtra("number",getIntent().getStringExtra("number"));
                             startActivity(intent);
                             finish();

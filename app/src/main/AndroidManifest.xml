@@ -27,7 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View_activity.View_Profile_main"></activity>
+        <activity android:name=".Others.Creates_profile"></activity>
+        <activity android:name=".View_activity.Homes_main" />
         <activity android:name=".Home_Activity" />
         <activity android:name=".Others.Splash_Screen" />
         <activity android:name=".Others.About_Activity" />
