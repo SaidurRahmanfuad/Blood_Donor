@@ -1,12 +1,19 @@
 package com.saidur.blooddonor.View_activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +21,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.saidur.blooddonor.Adapter.Donors_viewAdaptar;
+import com.saidur.blooddonor.Adapter.firebase_donors_viewholder;
 import com.saidur.blooddonor.Database.Queary;
 import com.saidur.blooddonor.Model.Donors;
 import com.saidur.blooddonor.R;
@@ -28,23 +40,32 @@ public class View_activity extends AppCompatActivity {
     private TextView availableDonorTV;
     private Button viewProfileBTN;
     private RecyclerView recyclerView;
-    private List<Donors> donorList ;
+    private List<Donors> donorsList ;
     private Donors_viewAdaptar donorViewAdepter;
     private Queary quary;
     private String blood = null;
     private ImageView imageView;
+    private FirebaseRecyclerOptions<Donors> options;
+    private FirebaseRecyclerAdapter<Donors, firebase_donors_viewholder> adapter;
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_activity);
-        inti();
-        blood = getIntent().getStringExtra("BLOODGROUP");
+        /*inti();
+        blood = getIntent().getStringExtra("Bloodgroup");
         DataShow();
 
         onClick();
-
+        recyclerView.setAdapter(adapter);
+        onStart();*/
     }
 
+    /*@Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
 
     @Override
     protected void onRestart() {
@@ -62,19 +83,19 @@ public class View_activity extends AppCompatActivity {
             if (blood == null) {
 
 
-                donorList = quary.getDonorDBdata();
+              //  donorList = quary.getDonorDBdata();
 
             } else {
                 spinner.setVisibility(View.GONE);
                 availableDonorTV.setText("Available Donor List");
-                donorList = quary.getAvalableBloodGroupDetails(blood);
+                donorsList = quary.getAvalableBloodGroupDetails(blood);
             }
 
         } catch (Exception e) {
 
         }
 
-        if(donorList == null)
+        if(donorsList == null)
         {
             imageView.setVisibility(View.VISIBLE);
             //Toast.makeText(this, "image", Toast.LENGTH_SHORT).show();
@@ -87,7 +108,7 @@ public class View_activity extends AppCompatActivity {
             //  recyclerView.setVisibility(View.VISIBLE);
         }
 
-        donorViewAdepter = new Donors_viewAdaptar(donorList, this);
+        donorViewAdepter = new Donors_viewAdaptar(donorsList, this);
         recyclerView.setAdapter(donorViewAdepter);
     }
 
@@ -98,18 +119,18 @@ public class View_activity extends AppCompatActivity {
 
             if (blood) {
 
-                donorList = quary.searchByBlood(search);
+                donorsList = quary.searchByBlood(search);
 
             } else {
                 //spinner.setVisibility(View.GONE);
-                donorList = quary.searchByName(search);
+                donorsList = quary.searchByName(search);
             }
 
         } catch (Exception e) {
 
         }
 
-        if(donorList.size()<1)
+        if(donorsList.size()<1)
         {
             imageView.setVisibility(View.VISIBLE);
             imageView.setImageResource(R.drawable.not_found);
@@ -118,17 +139,17 @@ public class View_activity extends AppCompatActivity {
             imageView.setVisibility(View.GONE);
 
         }
-        donorViewAdepter = new Donors_viewAdaptar(donorList, this);
+        donorViewAdepter = new Donors_viewAdaptar(donorsList, this);
         recyclerView.setAdapter(donorViewAdepter);
     }
 
     private void onClick() {
-       /* viewProfileBTN.setOnClickListener(new View.OnClickListener() {
+       viewProfileBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ViewActivity.this,ProfileViewActivity.class));
+                startActivity(new Intent(View_activity.this,View_profileActivity.class));
             }
-        });*/
+        });
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -172,17 +193,48 @@ public class View_activity extends AppCompatActivity {
 
 
     }
-
+   public Bitmap StringToBitMap(String encodedString) {
+       try {
+           byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+           Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+           return bitmap;
+       } catch (Exception e) {
+           e.getMessage();
+           return null;
+       }
+   }
     private void inti() {
 
         imageView = findViewById(R.id.bloodSearchIVId);
         availableDonorTV = findViewById(R.id.availableDonorTVId);
-        donorList = new ArrayList<>();
-        quary = new Queary(this);
+        //donors class create korarpor  arrylit create korbo
+        donorsList = new ArrayList<>();
+        //quary = new Queary(this);
         spinner = findViewById(R.id.search_by_blood_spinner_id);
         editText = findViewById(R.id.search_by_name_editText_id);
         recyclerView = findViewById(R.id.viewRecyclerViewId);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //   viewProfileBTN = findViewById(R.id.viewProfileBTNId);
-    }
+        //  viewProfileBTN = findViewById(R.id.viewProfileBTNId);
+
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("Donors_Profile");
+        options=new FirebaseRecyclerOptions.Builder<Donors>()
+                .setQuery(databaseReference,Donors.class).build();
+
+        adapter =new FirebaseRecyclerAdapter<Donors, firebase_donors_viewholder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull firebase_donors_viewholder holder, int position, @NonNull Donors model) {
+
+               holder.donor_name.setText(model.getName());
+               holder.donor_blood_group.setText(model.getBloodGroup());
+               holder.donor_image.setImageBitmap(StringToBitMap(model.getImage()));
+            }
+
+            @NonNull
+            @Override
+            public firebase_donors_viewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                return new firebase_donors_viewholder(LayoutInflater.from(View_activity.this)
+                        .inflate(R.layout.view_model_design,viewGroup,false));
+            }
+        };
+    }*/
 }
