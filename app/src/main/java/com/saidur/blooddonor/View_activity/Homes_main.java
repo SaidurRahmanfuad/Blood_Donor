@@ -114,12 +114,12 @@ public class Homes_main extends AppCompatActivity {
 
         inti();
         blood = getIntent().getStringExtra("Bloodgroup");
-        DataShow();
+        //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            DataShow();
 
         recyclerView.setAdapter(adapter);
         onStart();
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -222,10 +222,10 @@ public class Homes_main extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        DataShow();
+        //DataShow();
     }
 
-    private void DataShow()
+    /*private void DataShow()
     {
 
         try {
@@ -262,7 +262,7 @@ public class Homes_main extends AppCompatActivity {
 
         donorViewAdepter = new Donors_viewAdaptar(donorsList, this);
         recyclerView.setAdapter(donorViewAdepter);
-    }
+    }*/
 
     private void searchDataShow(String search, boolean blood) {
 

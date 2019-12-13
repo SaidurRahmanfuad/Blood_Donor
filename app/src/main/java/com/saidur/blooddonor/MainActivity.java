@@ -10,19 +10,28 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.VideoView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.saidur.blooddonor.Others.Registration_Activity;
+import com.saidur.blooddonor.View_activity.Homes_main;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private VideoView srVideoview;
     MediaPlayer srMediaPlayer;
     int srCurrentVideoPosition;
 
+FirebaseAuth firebaseAuth;
+FirebaseUser firebaseUser;
     Button goto_register;
+    Timer timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //checkisloggedin();
         goto_register = findViewById(R.id.btn_goto_reg);
 
         goto_register.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +68,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }, 1500);*/
-
+           timer =new Timer();
+           timer.schedule(new TimerTask() {
+               @Override
+               public void run() {
+                   Intent intent = new Intent(MainActivity.this, Registration_Activity.class);
+                   startActivity(intent);
+                   finish();
+               }
+           },10000);
 
 
         srVideoview=findViewById(R.id.sr_VideoView);
@@ -81,7 +98,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
+
+
     @Override
     protected void onPause() {
         super.onPause();
